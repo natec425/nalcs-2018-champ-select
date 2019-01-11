@@ -1,3 +1,5 @@
+import './champ-select-header.js';
+
 class ChampSelect extends HTMLElement {
     constructor() {
         super();
@@ -7,12 +9,23 @@ class ChampSelect extends HTMLElement {
 
     connectedCallback() {
         this.insertAdjacentHTML('beforeend', `
-        <p>${this.getAttribute('blue-side')}</p>
-        <p>${this.getAttribute('red-side')}</p>
+        <champ-select-header
+            blue-side="${this.getAttribute('blue-side')}"
+            red-side="${this.getAttribute('red-side')}">
+        </champ-select-header>
         `);
     }
 }
 
 ChampSelect.template = document.createElement('template');
-ChampSelect.template.innerHTML = `<slot></slot>`;
+ChampSelect.template.innerHTML = `
+<style>
+:host {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+</style>
+<slot></slot>
+`;
 customElements.define('champ-select', ChampSelect);
